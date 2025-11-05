@@ -7,11 +7,6 @@ function SumCalculator() {
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
 
-    const validateInput = (value) => {
-        // Cho phép số hoặc chuỗi rỗng
-        return value === '' || !isNaN(value);
-    };
-
     const handleCalculate = () => {
         setError('');
         setResult(null);
@@ -21,46 +16,50 @@ function SumCalculator() {
             return;
         }
 
+        const validNumberPattern = /^-?\d*\.?\d*$/;
+        if (!validNumberPattern.test(number1) || !validNumberPattern.test(number2)) {
+            setError('Invalid input: Please enter valid numeric values only');
+            return;
+        }
+
         const num1 = parseFloat(number1);
         const num2 = parseFloat(number2);
 
         if (isNaN(num1) || isNaN(num2)) {
-            setError('Please enter valid numbers only');
+            setError('Please enter valid numbers');
             return;
         }
 
         const sum = num1 + num2;
-        setResult(sum);
+
+        // Format kết quả theo hàng nghìn, làm tròn 3 chữ số thập phân
+        const formattedSum = sum.toLocaleString('en-US', {
+            maximumFractionDigits: 3,
+        });
+
+        setResult(formattedSum);
     };
 
     const handleNumber1Change = (e) => {
         const value = e.target.value;
-        setNumber1(value);
-        setResult(null); //  clear result khi user nhập lại
-
-        if (!validateInput(value)) {
-            setError('Please enter valid numbers only');
-        } else {
+        if (/^-?\d*\.?\d*$/.test(value) || value === '') {
+            setNumber1(value);
             setError('');
+            setResult(null);
         }
     };
 
     const handleNumber2Change = (e) => {
         const value = e.target.value;
-        setNumber2(value);
-        setResult(null); //  clear result khi user nhập lại
-
-        if (!validateInput(value)) {
-            setError('Please enter valid numbers only');
-        } else {
+        if (/^-?\d*\.?\d*$/.test(value) || value === '') {
+            setNumber2(value);
             setError('');
+            setResult(null);
         }
     };
 
     const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleCalculate();
-        }
+        if (e.key === 'Enter') handleCalculate();
     };
 
     return (
@@ -73,6 +72,7 @@ function SumCalculator() {
                     </div>
 
                     <div>
+                        {/* Number 1 */}
                         <div className={styles.inputGroup}>
                             <label className={styles.label}>Number 1:</label>
                             <input
@@ -85,6 +85,7 @@ function SumCalculator() {
                             />
                         </div>
 
+                        {/* Number 2 */}
                         <div className={styles.inputGroup}>
                             <label className={styles.label}>Number 2:</label>
                             <input
@@ -97,20 +98,31 @@ function SumCalculator() {
                             />
                         </div>
 
+                        {/* Button */}
                         <button onClick={handleCalculate} className={styles.button}>
                             Calculate Sum
                         </button>
 
+                        {/* Error box */}
                         {error && (
                             <div className={styles.errorBox}>
                                 <p className={styles.errorText}>{error}</p>
                             </div>
                         )}
 
+                        {/* Result box */}
                         {result !== null && !error && (
                             <div className={styles.resultBox}>
                                 <p className={styles.resultLabel}>Result:</p>
-                                <p className={styles.resultValue}>{result}</p>
+                                <p
+                                    className={styles.resultValue}
+                                    title={result} // Hiển thị tooltip khi hover
+                                >
+                                    {/* Nếu kết quả dài hơn 15 ký tự thì rút gọn + thêm dấu “…” */}
+                                    {String(result).length > 15
+                                        ? String(result).slice(0, 15) + '…'
+                                        : result}
+                                </p>
                             </div>
                         )}
                     </div>
@@ -123,3 +135,4 @@ function SumCalculator() {
 export default function App() {
     return <SumCalculator />;
 }
+    
