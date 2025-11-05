@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.container {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #fce7f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    padding: 1rem;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 500px;
+}
+
+.calculator {
+    width: 100%;
+    padding: 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: #db2777;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #ec4899;
+    font-size: 1rem;
+}
+
+.inputGroup {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    color: #db2777;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    outline: none;
+    transition: box-shadow 0.2s;
+}
+
+.input:focus {
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3);
+}
+
+.button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: #ec4899;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #db2777;
+}
+
+.errorBox {
+    margin-top: 1rem;
+    background-color: #fee2e2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.errorText {
+    color: #dc2626;
+    text-align: center;
+    font-weight: 500;
+}
+
+.resultBox {
+    margin-top: 1rem;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.resultLabel {
+    color: #db2777;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.resultValue {
+    color: #be185d;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+
+@media (max-width: 640px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .calculator {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .resultValue {
+        font-size: 2.5rem;
+    }
+}
